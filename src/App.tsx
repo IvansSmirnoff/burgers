@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import './App.css';
 
 function App() {
