@@ -1,0 +1,31 @@
+.column{
+    /*border: 4px double green;*/
+    position: relative;
+    /*position: absolute;*/
+    width: 600px;
+    height: 650px;
+}
+.scrollzone {
+    overflow: auto;
+    height: 100%;
+}
+.scrollzone::-webkit-scrollbar {
+    background-color: #2F2F37;
+    width: 10px;
+    height: 8px;
+}
+.scrollzone::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
+.product_some{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    height: 208px;
+    width:272px;
+}
+.product_list{
+    display: flex;
+    flex-flow: row wrap;
+}
