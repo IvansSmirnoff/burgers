@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -24,6 +25,11 @@ const Product = ({ name, price, image }) => {
   );
 };
 
+Product.propTypes = {
+  name: PropTypes.string,
+  price: PropTypes.number,
+  image: PropTypes.string,
+};
 
 const ProductList = ({listType}) => {
   return (
@@ -40,7 +46,11 @@ const ProductList = ({listType}) => {
       </div>
     </>
   );
-}
+};
+
+ProductList.propTypes = {
+  listType: PropTypes.oneOf(['bun', 'main', 'sauce']),
+};
 
 
 function BurgerIngredients() {
@@ -70,6 +80,6 @@ function BurgerIngredients() {
 
         </div>
     );
-}
+};
 
 export default BurgerIngredients;
