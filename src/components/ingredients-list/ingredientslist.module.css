@@ -1,0 +1,4 @@
+.ingredients_list{
+    display: flex;
+    flex-flow: row wrap;
+}

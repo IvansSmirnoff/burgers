@@ -17,15 +17,6 @@
 .scrollzone::-webkit-scrollbar-thumb {
     background: #8585AD;
 }
-.product_some{
+.ingredient_tabs{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px;
-    height: 208px;
-    width:272px;
-}
-.product_list{
-    display: flex;
-    flex-flow: row wrap;
 }

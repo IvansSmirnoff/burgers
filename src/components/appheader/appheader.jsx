@@ -12,19 +12,19 @@ function AppHeader() {
       <div className={appHeaderStyles.app_header}>
           <menu className={appHeaderStyles.app_header_in}>
 
-              <div className={appHeaderStyles.app_header_row}>
+              <a className={appHeaderStyles.app_header_row}>
                   <BurgerIcon type="primary" />
                   Конструктор
 
                   <ListIcon type="primary" />
                   Лента Заказов
-              </div>
+              </a>
 
               <Logo/>
-              <div className={appHeaderStyles.app_header_row}>
+              <a className={appHeaderStyles.app_header_row}>
               <ProfileIcon type="primary" />
                   Личный кабинет
-              </div>
+              </a>
           </menu>
       </div>
   );

@@ -1,0 +1,15 @@
+.ingredient_some{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    height: 208px;
+    width:272px;
+}
+.price{
+    display: inline-flex;
+}
+.currency{
+    composes: price;
+    margin-right: 8px;
+}
