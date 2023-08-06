@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../modal/modal';
-import IngredientDetails from '../ingredient-details/ingredientdetails';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './ingredient.module.css';
+
+import Modal from '../modal/modal';
+import IngredientDetails from '../ingredient-details/ingredientdetails';
 
 const Ingredient = ({ ingredient }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +19,7 @@ const Ingredient = ({ ingredient }) => {
 	}
 
   return (
-    <div className={styles.ingredient_some} onClick={handleModalOpen}>
+    <li className={styles.ingredient_some} onClick={handleModalOpen}>
       <img src={ingredient.image} alt={ingredient.name} />
       <span className={styles.price}>
         <span className={styles.currency}>{ingredient.price}</span> <CurrencyIcon type="primary" />
@@ -32,7 +33,7 @@ const Ingredient = ({ ingredient }) => {
 			<IngredientDetails ingredient={ingredient}/>
 		</Modal>
 		}
-    </div>
+    </li>
   );
 };
   
