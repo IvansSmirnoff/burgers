@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ingredientsListStyle from './ingredientslist.module.css';
+import styles from './ingredientslist.module.css';
 import Ingredient from '../ingredient/ingredient';
 import data from '../../utils/data';
 
@@ -17,7 +17,7 @@ const IngredientList = ({listType}) => {
       <p className="text text_type_main-medium">
         {typeNames[listType]}
       </p>
-      <div className={ingredientsListStyle.ingredients_list}>
+      <div className={styles.ingredients_list}>
         {data.map((itm) => {
           return (itm.type === listType) ? (
             <Ingredient key={itm._id} image={itm.image} name={itm.name} price={itm.price}/>

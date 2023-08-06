@@ -2,18 +2,18 @@ import React from 'react';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import burgerIngredientsStyle from './burgeringredients.module.css';
+import styles from './burgeringredients.module.css';
 import IngredientList from '../ingredients-list/ingredientslist';
 
 
 function BurgerIngredients() {
     const [current, setCurrent] = React.useState('one')
     return (
-        <div className={burgerIngredientsStyle.column}>
+        <div className={styles.column}>
             <p className="text text_type_main-large">
                 Соберите бургер
             </p>
-            <div className={burgerIngredientsStyle.ingredient_tabs}>
+            <div className={styles.ingredient_tabs}>
                 <Tab value="one" active={current === 'one'} onClick={setCurrent}>
                     Булки
                 </Tab>
@@ -25,7 +25,7 @@ function BurgerIngredients() {
                 </Tab>
             </div>
 
-            <div className={burgerIngredientsStyle.scrollzone}>
+            <div className={styles.scrollzone}>
                 <IngredientList listType={'bun'}/>
                 <IngredientList listType={'sauce'}/>
                 <IngredientList listType={'main'}/>

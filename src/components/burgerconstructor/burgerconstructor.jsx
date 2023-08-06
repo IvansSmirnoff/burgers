@@ -4,7 +4,7 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import burgerConstructorStyles from './burgerconstructor.module.css';
+import styles from './burgerconstructor.module.css';
 import data from '../../utils/data';
 
 
@@ -13,8 +13,8 @@ function BurgerConstructor() {
     const burgerContent = data.filter((item) => (item.type === 'main' || item.type === 'sauce'))
     console.log(burgerContent)
     return (
-        <div className={burgerConstructorStyles.column}>
-            <div className={burgerConstructorStyles.header_box}/>
+        <div className={styles.column}>
+            <div className={styles.header_box}/>
 
             {(bun)?
                 <ConstructorElement
@@ -26,7 +26,7 @@ function BurgerConstructor() {
                     thumbnail={bun.image}
                 /> : null}
 
-            <div className={burgerConstructorStyles.column_list}>
+            <div className={styles.column_list}>
                 {burgerContent.map((itm) =>
                         <ConstructorElement
                             key={itm._id}
@@ -48,7 +48,7 @@ function BurgerConstructor() {
                     thumbnail={bun.image}
                 /> : null}
 
-            <div className={burgerConstructorStyles.total}>
+            <div className={styles.total}>
                 <p className="text text_type_digits-medium">610</p>
                 <CurrencyIcon type="primary"/>
                 <Button type="primary" size="medium" htmlType='submit'>Оформить заказ</Button>

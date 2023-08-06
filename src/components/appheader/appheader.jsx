@@ -5,14 +5,14 @@ import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import appHeaderStyles from './appheader.module.css';
+import styles from './appheader.module.css';
 
 function AppHeader() {
   return (
-      <div className={appHeaderStyles.app_header}>
-          <menu className={appHeaderStyles.app_header_in}>
+      <div className={styles.app_header}>
+          <menu className={styles.app_header_in}>
 
-              <a className={appHeaderStyles.app_header_row}>
+              <a className={styles.app_header_row}>
                   <BurgerIcon type="primary" />
                   Конструктор
 
@@ -21,7 +21,7 @@ function AppHeader() {
               </a>
 
               <Logo/>
-              <a className={appHeaderStyles.app_header_row}>
+              <a className={styles.app_header_row}>
               <ProfileIcon type="primary" />
                   Личный кабинет
               </a>
