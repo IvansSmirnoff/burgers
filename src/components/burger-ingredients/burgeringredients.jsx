@@ -6,7 +6,7 @@ import styles from './burgeringredients.module.css';
 import IngredientList from '../ingredients-list/ingredientslist';
 
 
-function BurgerIngredients() {
+function BurgerIngredients( {ingredients} ) {
     const [current, setCurrent] = React.useState('one')
     return (
         <div className={styles.column}>
@@ -26,9 +26,9 @@ function BurgerIngredients() {
             </div>
 
             <div className={styles.scrollzone}>
-                <IngredientList listType={'bun'}/>
-                <IngredientList listType={'sauce'}/>
-                <IngredientList listType={'main'}/>
+                <IngredientList listType={ 'bun' } ingredients={ ingredients }/>
+                <IngredientList listType={ 'sauce' } ingredients={ ingredients }/>
+                <IngredientList listType={ 'main' } ingredients={ ingredients }/>
             </div>
 
         </div>
