@@ -76,7 +76,7 @@ const App = () => {
         <AppHeader />
         <main className={styles.main_columns}>
           { loading && <p>Везём булки в ресторан. Ждите...</p> }
-          { error && <p>Ошибка. Ваши булки в другом замке</p> }
+          { error && <p>Ошибка. Ваши булки в другом замке!</p> }
           { ingredients && <BurgerIngredients ingredients={ ingredients } /> }
           <div className={styles.main_border} />
           { ingredients && <BurgerConstructor ingredients={ ingredients } /> }
