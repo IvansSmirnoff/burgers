@@ -19,13 +19,15 @@ const Ingredient = ({ ingredient }) => {
 	}
 
   return (
+	<>
     <li className={styles.ingredient_some} onClick={handleModalOpen}>
       <img src={ingredient.image} alt={ingredient.name} />
       <span className={styles.price}>
         <span className={styles.currency}>{ingredient.price}</span> <CurrencyIcon type="primary" />
       </span>
       <span>{ingredient.name}</span>
-      {
+    </li>
+	{
 		isModalOpen &&
 		<Modal 
 			header="Детали ингредиента" 
@@ -33,7 +35,7 @@ const Ingredient = ({ ingredient }) => {
 			<IngredientDetails ingredient={ingredient}/>
 		</Modal>
 		}
-    </li>
+	</>
   );
 };
   

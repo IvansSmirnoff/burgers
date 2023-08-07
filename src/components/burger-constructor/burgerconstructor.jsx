@@ -22,7 +22,8 @@ function BurgerConstructor({ingredients}) {
 		setIsModalOpen(true);
 	}
 
-    const bun = ingredients.find(item => item._id === '60666c42cc7b410027a1a9b1');
+    const bun = ingredients.find(item => item.name === 'Краторная булка N-200i');
+    console.log(bun)
     const burgerContent = ingredients.filter((item) => (item.type === 'main' || item.type === 'sauce'))
     return (
         <div className={styles.column}>

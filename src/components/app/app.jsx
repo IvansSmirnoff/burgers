@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import AppHeader from '../appheader/appheader'; 
 import BurgerConstructor from '../burger-constructor/burgerconstructor';
 import BurgerIngredients from '../burger-ingredients/burgeringredients';
+import config from '../../config/api'
 
-// useData и api можно вынести куда-нибудь в utils/ и в конфиг
 const api = {
 	getIngredients: {
-		url: 'https://norma.nomoreparties.space/api/ingredients',
+		url: config.url,
 		options: {}
 	}
 }
-// нет такой штуки в стандартной реактовской библиотеке? По ощущению, должно быть, обработчик прям стандартный, но я не нагуглил
+
 function useData(request){
 	const [data, setData] = useState(void 0);
 	const [loading, setLoading] = useState(false);

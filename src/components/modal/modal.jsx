@@ -2,18 +2,13 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modaloverlay";
-
+import config from '../../config/modal'
 import PropTypes from 'prop-types';
 
 import styles from './modal.module.css';
 
 
 const modalRoot = document.getElementById('app-modal');
-
-// TODO: вынести в конфиг вместе с апи конфигом
-const config = {
-	ESC_KEY: "Escape"
-};
 
 function Modal({children, header, onClose}){
 
