@@ -1,7 +1,5 @@
 .column{
-    /*border: 4px double green;*/
     position: relative;
-    /*position: absolute;*/
     width: 600px;
     height: 650px;
 }

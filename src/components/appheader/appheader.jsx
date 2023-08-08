@@ -8,26 +8,25 @@ import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './appheader.module.css';
 
 function AppHeader() {
-  return (
-      <div className={styles.app_header}>
-          <menu className={styles.app_header_in}>
-
-              <a className={styles.app_header_row}>
-                  <BurgerIcon type="primary" />
-                  Конструктор
-
-                  <ListIcon type="primary" />
-                  Лента Заказов
-              </a>
-
-              <Logo/>
-              <a className={styles.app_header_row}>
-              <ProfileIcon type="primary" />
-                  Личный кабинет
-              </a>
-          </menu>
-      </div>
-  );
+	return (
+		<header className= { `${styles.header} p-4` } >
+			<menu className={ `${styles.menu} container` }>
+				<a href='#' className={ `${styles.btn} ${styles.active} p-5 mr-2` }>
+					<BurgerIcon type="primary" />
+					<span className='pl-2'>Конструктор</span>
+				</a>
+				<a href='#' className={ `${styles.btn} p-5` }>
+					<ListIcon type="secondary" />
+					<span className='pl-2'>Лента заказов</span>
+				</a>
+				<Logo />
+				<a href='#' className={ `${styles.btn} p-5` }>
+					<ProfileIcon type="secondary" />
+					<span className='pl-2'>Личный кабинет</span> 
+				</a>
+			</menu>
+		</header>
+	);
 }
 
 export default AppHeader;

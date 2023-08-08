@@ -12,13 +12,12 @@ const modalRoot = document.getElementById('app-modal');
 
 function Modal({children, header, onClose}){
 
-	const exitByEscape = (e) => {
-		if (e.key === config.ESC_KEY) {
-			onClose();
-		}
-	} 
-
 	useEffect(() => {
+		const exitByEscape = (e) => {
+			if (e.key === config.ESC_KEY) {
+				onClose();
+			}
+		} 
 		document.body.addEventListener('keydown', exitByEscape, true);
 		return () => {
 			document.body.removeEventListener('keydown', exitByEscape, true);

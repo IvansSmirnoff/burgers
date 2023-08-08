@@ -1,75 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './app.module.css';
-import PropTypes from 'prop-types';
 import AppHeader from '../appheader/appheader'; 
 import BurgerConstructor from '../burger-constructor/burgerconstructor';
 import BurgerIngredients from '../burger-ingredients/burgeringredients';
 import config from '../../config/api'
 
+import useData from './hooks/usedata';
+
 const api = {
 	getIngredients: {
-		url: config.url,
+		url: `${config.url}/ingredients`,
 		options: {}
 	}
 }
 
-function useData(request){
-	const [data, setData] = useState(void 0);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(false);
-
-	const checkReponse = (res) => {
-		return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-	  };
-
-	function execute(){
-			setLoading(true);
-			setError(false);
-			fetch(request.url, request.options)
-			.then(checkReponse)
-			.then(res => {
-				setData(res.data);
-				setError(false);
-			})
-			.catch(error => {
-				console.log(error);
-				setError(true);
-			})
-			.finally(() => setLoading(false));
-	};
-
-	return {
-		data,
-		loading,
-		error,
-		execute
-	}
-}
-
-useData.propTypes = {
-	request: PropTypes.shape({
-		url: PropTypes.string.isRequired,
-		options: PropTypes.shape({
-			method: PropTypes.oneOf(['GET', 'POST', 'PUT', 'DELETE']),
-			headers: PropTypes.oneOf([
-				"'Content-Type': 'application/json'", 
-				"'Content-Type': 'application/x-www-form-urlencoded'"]),
-			body: PropTypes.string
-		})
-	}).isRequired
-}
-
 const App = () => {
+
   const { 
 		data: ingredients, 
 		loading, 
-		error, 
-		execute: executeIngredients 
+		error,
 	} = useData(api.getIngredients);
-
-  useEffect(()=>{
-		executeIngredients();
-	}, []);
 
     return (
       <div className={styles.main_rect}>
