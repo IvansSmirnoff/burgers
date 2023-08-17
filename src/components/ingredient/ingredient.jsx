@@ -1,19 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import ingredientStyle from './ingredient.module.css';
+import styles from './ingredient.module.css';
 
-const Ingredient = ({ name, price, image }) => {
+import Modal from '../modal/modal';
+import IngredientDetails from '../ingredient-details/ingredientdetails';
+
+const Ingredient = ({ ingredient }) => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const handleModalClose = () => {
+		setIsModalOpen(false);
+	}
+
+	const handleModalOpen = () =>{
+		setIsModalOpen(true);
+	}
+
   return (
-    <div className={ingredientStyle.ingredient_some}>
-      <img src={image} alt={name} />
-      <span className={ingredientStyle.price}>
-        <span className={ingredientStyle.currency}>{price}</span> <CurrencyIcon type="primary" />
+	<>
+    <li className={styles.ingredient_some} onClick={handleModalOpen}>
+      <img src={ingredient.image} alt={ingredient.name} />
+      <span className={styles.price}>
+        <span className={styles.currency}>{ingredient.price}</span> <CurrencyIcon type="primary" />
       </span>
-      <span>{name}</span>
-    </div>
+      <span>{ingredient.name}</span>
+    </li>
+	{
+		isModalOpen &&
+		<Modal 
+			header="Детали ингредиента" 
+			onClose={handleModalClose}>
+			<IngredientDetails ingredient={ingredient}/>
+		</Modal>
+		}
+	</>
   );
 };
   
