@@ -4,16 +4,19 @@ import PropTypes from 'prop-types';
 import styles from './ingredientslist.module.css';
 import Ingredient from '../ingredient/ingredient';
 
+import { forwardRef } from 'react';
+
+
 const typeNames = {
     'bun':'Булки',
     'sauce':'Соусы',
     'main':'Начинки'
 };
 
-const IngredientList = ({listType, ingredients}) => {
+const IngredientList = forwardRef(({ ingredients, listType }, ref) => {
   return (
     <>
-      <p className="text text_type_main-medium">
+      <p ref={ref} className="text text_type_main-medium">
         {typeNames[listType]}
       </p>
       <div className={styles.ingredients_list}>
@@ -29,7 +32,7 @@ const IngredientList = ({listType, ingredients}) => {
       </div>
     </>
   );
-};
+});
 
 IngredientList.propTypes = {
   listType: PropTypes.oneOf(['bun', 'main', 'sauce']),
