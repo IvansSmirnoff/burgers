@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { compose, createStore, applyMiddleware } from 'redux';
+import { compose, applyMiddleware } from 'redux';
+import { legacy_createStore as createStore} from 'redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './services/reducers';
 import './index.css';

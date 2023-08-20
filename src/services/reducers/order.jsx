@@ -43,4 +43,4 @@ export const orderReducer = (state = initialState, action) => {
 		}
 	}
 
-};
+}

@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrag } from "react-dnd";
-import PropTypes from 'prop-types';
+
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-
-import styles from './ingredient.module.css';
-
-import Modal from '../modal/modal';
-import IngredientDetails from '../ingredient-details/ingredientdetails';
-
+import Modal from './../modal/modal';
+import IngredientDetails from './../ingredient-details/ingredientdetails';
 import { SET_CURRENT_INGREDIENT, UNSET_CURRENT_INGREDIENT } from '../../services/actions/current-ingredient';
 import { DND_TYPES } from '../../const/main';
 
+import { ingredientPropTypes } from '../../utils/proptypes';
+
+import styles from './ingredient.module.css';
 
 const Ingredient = ({ ingredient }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,46 +47,42 @@ const Ingredient = ({ ingredient }) => {
 		setIsModalOpen(true);
 	}
 
-  return (
-	<>
-    <li
-	className={styles.ingredient_some}
-	onClick={handleModalOpen}
-	ref={dragRef}
-	style={{opacity}}
-	>
-		<div 
-		draggable={false}
-		className={styles.counter}
-		>
+	return(
+		<>
+			<li 
+			ref={dragRef}
+			style={{opacity}}
+			className={styles.container} 
+			onClick={handleModalOpen}>
+				<div draggable={false} className={styles.counter}>
+					{
+						ingredientCount > 0 &&
+						<Counter count={ingredientCount} size="default" />
+					}
+				</div>
+				<img src={ingredient.image} alt={ingredient.name} className="ml-4 mr-4 mb-1"/>
+				<p className={styles.price}>
+					<span className="text text_type_digits-default"> {ingredient.price} </span>
+					<CurrencyIcon type="primary" />
+				</p>
+				<p className="text text_type_main-small">
+					{ingredient.name}
+				</p>
+			</li>
 			{
-				ingredientCount > 0 &&
-				<Counter count={ingredientCount} size="default" />
+				isModalOpen &&
+				<Modal 
+					header="Детали ингредиента" 
+					onClose={handleModalClose}>
+					<IngredientDetails/>
+				</Modal>
 			}
-		</div>
-      	<img src={ingredient.image} alt={ingredient.name} />
-      	<span className={styles.price}>
-        	<span className={styles.currency}>{ingredient.price}</span> 
-			<CurrencyIcon type="primary" />
-      	</span>
-      <span>{ingredient.name}</span>
-    </li>
-	{
-		isModalOpen &&
-		<Modal 
-			header="Детали ингредиента" 
-			onClose={handleModalClose}>
-			<IngredientDetails ingredient={ingredient}/>
-		</Modal>
-		}
-	</>
-  );
-};
-  
+		</>
+	);
+}
+
 Ingredient.propTypes = {
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
-};
+	ingredient: ingredientPropTypes.isRequired
+}
 
 export default Ingredient;

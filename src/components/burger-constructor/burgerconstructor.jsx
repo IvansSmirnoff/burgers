@@ -1,32 +1,26 @@
-import React, {useState, useCallback} from 'react';
-
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
-import { ingredientPropTypes } from '../../utils/proptypes'
-
-import styles from './burgerconstructor.module.css';
-
-import Modal from '../modal/modal';
-import OrderDetails from '../order-details/orderdetails';
-
+import { useCallback, useState } from 'react';
+import { 
+	Button, 
+	CurrencyIcon
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import Modal from './../modal/modal';
+import OrderDetails from './../order-details/orderdetails';
+import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import { useDrop } from "react-dnd";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { CLOSE_ORDER, sendOrder } from '../../services/actions/order';
-
-import { DND_TYPES } from '../../const/main';
-
 import { 
 	ADD_INGREDIENT, 
 	ADD_BUN, 
 	SORT_INGREDIENT, 
 	COUNT_TOTAL_PRICE } from './../../services/actions/constructor-ingredients';
+import { DND_TYPES } from '../../const/main';
 
-import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
+import styles from './burgerconstructor.module.css';
 
+function BurgerConstructor () {
 
-function BurgerConstructor() {
 	const {
 		ingredients,
 		bun,
@@ -92,9 +86,10 @@ function BurgerConstructor() {
 		dispatch(sendOrder({ingredients: [ bun._id, ...ingredientIds, bun._id]}));
 		setIsOrderModalOpen(true);
 	}
-    const hoverStyle = isHover ? "#2f2f37 dashed 3px" : 'inherit'
 
-    return (
+	const outline = isHover ? "#2f2f37 dashed 3px" : 'inherit'
+
+	return (
 		<div className={styles.container}>
 			<section className={styles.ingredientsBlockedTop}>
 				<ul className={styles.ingredientsList}>
@@ -111,7 +106,7 @@ function BurgerConstructor() {
 			</section>
 			<section 
 				ref={dropTarget}
-				style={{hoverStyle}}
+				style={{outline}}
 				className={styles.ingredientsSection}>
 				<ul className={styles.ingredientsList}>
 					{
@@ -163,9 +158,5 @@ function BurgerConstructor() {
 		</div>
 	);
 }
-
-BurgerConstructor.propTypes = {
-	ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-}
-
+  
 export default BurgerConstructor;

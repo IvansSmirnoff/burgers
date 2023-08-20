@@ -10,7 +10,7 @@ import IngredientList from '../ingredients-list/ingredientslist';
 
 function BurgerIngredients() {
 
-    const ingredientMenuRef = useRef(null);
+	const ingredientMenuRef = useRef(null);
 
 	const ref = {
 		bun: useRef(null),
@@ -21,11 +21,6 @@ function BurgerIngredients() {
 	const [current, setCurrent] = useState(INGREDIENT_TYPES.BUN)
 
 	const {ingredients, loading, error} = useSelector(state => state.ingredients);
-
-	const onTabClick = (type) => {
-		setCurrent(type);
-		ref[type].current.scrollIntoView({behavior:'smooth'});
-	}
 
 	const handleScroll = () => {
 		const menuTop = ingredientMenuRef.current.getBoundingClientRect().top;
@@ -44,39 +39,68 @@ function BurgerIngredients() {
 
 	}
 
-    return (
-        <div className={styles.column}>
-            <p className="text text_type_main-large">
-                Соберите бургер
-            </p>
-            <section className={styles.ingredient_tabs}>
-                <Tab value="one" active={current === INGREDIENT_TYPES.BUN} onClick={onTabClick}>
-                    Булки
-                </Tab>
-                <Tab value="two" active={current === INGREDIENT_TYPES.SAUCE} onClick={onTabClick}>
-                    Соусы
-                </Tab>
-                <Tab value="three" active={current === INGREDIENT_TYPES.MAIN} onClick={onTabClick}>
-                    Начинки
-                </Tab>
-            </section>
+	const onTabClick = (type) => {
+		setCurrent(type);
+		ref[type].current.scrollIntoView({behavior:'smooth'});
+	}
 
-            <section className={styles.scrollzone} onScroll={handleScroll}>
-                { loading && <p>Loading!</p> }
+	return (
+		<div className={ styles.column }>
+			<h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
+			<section 
+				ref={ingredientMenuRef}
+				className={styles.ingredient_tabs}
+			>
+    		  <Tab 
+			  value={INGREDIENT_TYPES.BUN} 
+			  active={current === INGREDIENT_TYPES.BUN} 
+			  onClick={onTabClick}>
+    		    Булки
+    		  </Tab>
+    		  <Tab 
+			  value={INGREDIENT_TYPES.SAUCE} 
+			  active={current === INGREDIENT_TYPES.SAUCE} 
+			  onClick={onTabClick}>
+    		    Соусы
+    		  </Tab>
+    		  <Tab 
+			  value={INGREDIENT_TYPES.MAIN} 
+			  active={current === INGREDIENT_TYPES.MAIN} 
+			  onClick={onTabClick}>
+    		    Начинки
+    		  </Tab>
+    		</section>
+			<section 
+				className={styles.scrollzone}
+				onScroll={handleScroll}
+			>
+				{ loading && <p>Loading!</p> }
 				{ error && <p>Error!</p> }
-                { 
+				{ 
 				ingredients && ingredients.length > 0 
 				&& (
-                    <>
-                    <IngredientList listType={ 'bun' } ingredients={ ingredients } ref={ref.bun}/>
-                    <IngredientList listType={ 'sauce' } ingredients={ ingredients } ref={ref.sauce}/>
-                    <IngredientList listType={ 'main' } ingredients={ ingredients } ref={ref.main}/>
-                    </>
-                )}
-            </section>
-
-        </div>
-    );
-};
-
+					<>
+					<IngredientList
+						ref={ref.bun}
+						ingredients = {ingredients}
+						filter={INGREDIENT_TYPES.BUN}
+						title='Булки' />
+					<IngredientList
+						ref={ref.sauce}
+						ingredients = {ingredients}
+						filter={INGREDIENT_TYPES.SAUCE}
+						title='Соусы' />
+					<IngredientList
+						ref={ref.main}
+						ingredients = {ingredients}
+						filter={INGREDIENT_TYPES.MAIN}
+						title='Начинки' />	
+					</>
+				)}
+			</section>
+		</div>
+					
+	);
+}
+  
 export default BurgerIngredients;
