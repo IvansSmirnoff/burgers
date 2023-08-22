@@ -10,16 +10,27 @@ import { useDrop } from "react-dnd";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { CLOSE_ORDER, sendOrder } from '../../services/actions/order';
+import addUniqueKeyIds from '../../utils/unique-key-generator'
+
 import { 
 	ADD_INGREDIENT, 
 	ADD_BUN, 
 	SORT_INGREDIENT, 
-	COUNT_TOTAL_PRICE } from './../../services/actions/constructor-ingredients';
+	COUNT_TOTAL_PRICE,
+	CLEAN_BIN } from './../../services/actions/constructor-ingredients';
 import { DND_TYPES } from '../../const/main';
 
 import styles from './burgerconstructor.module.css';
 
 function BurgerConstructor () {
+
+	const getBurgerInfo = (state) => ({
+		ingredients: state.constructorIngredients.ingredients,
+		bun: state.constructorIngredients.bun,
+		totalPrice: state.constructorIngredients.totalPrice,
+		loading: state.order.loading,
+		error: state.order.error
+	});
 
 	const {
 		ingredients,
@@ -27,13 +38,8 @@ function BurgerConstructor () {
 		totalPrice, 
 		loading, 
 		error
-	} = useSelector(state => ({
-		ingredients: state.constructorIngredients.ingredients,
-		bun: state.constructorIngredients.bun,
-		totalPrice: state.constructorIngredients.totalPrice,
-		loading: state.order.loading,
-		error: state.order.error
-	}));
+	} = useSelector(getBurgerInfo);
+
 	const dispatch = useDispatch();
 	const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
@@ -51,12 +57,12 @@ function BurgerConstructor () {
 		if(ingredient.type === 'bun'){
 			dispatch({
 				type: ADD_BUN,
-				payload: ingredient
+				payload: addUniqueKeyIds(ingredient)
 			});
 		}else{
 			dispatch({
 				type: ADD_INGREDIENT,
-				payload: ingredient
+				payload: addUniqueKeyIds(ingredient)
 			});
 		}
 		dispatch({
@@ -80,6 +86,9 @@ function BurgerConstructor () {
 		dispatch({
 			type: CLOSE_ORDER
 		});
+		dispatch({
+			type: CLEAN_BIN
+		})
 	}
 	const handleOrderOpen = () => {
 		const ingredientIds = ingredients.map((item) => item._id);
@@ -143,9 +152,11 @@ function BurgerConstructor () {
 			<section className={styles.order}>
 				<span className="text text_type_digits-medium">{ totalPrice }</span>
 				<span className="pl-2 pr-10"><CurrencyIcon type="primary" /></span>
-				<Button type="primary" size="medium" onClick={handleOrderOpen}>
-					{ loading ? "Загрузка" : "Оформить заказ" }
-				</Button>
+				{ ingredients && ingredients.length > 0 && bun &&
+					<Button type="primary" size="medium" onClick={handleOrderOpen}>
+						{ loading ? "Загрузка" : "Оформить заказ" }
+					</Button>
+				}
 				{
 					isOrderModalOpen && !loading && !error &&
 					<Modal 

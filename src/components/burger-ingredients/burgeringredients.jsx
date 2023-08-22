@@ -45,11 +45,11 @@ function BurgerIngredients() {
 	}
 
 	return (
-		<div className={ styles.column }>
+		<div className={ styles.container }>
 			<h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
 			<section 
 				ref={ingredientMenuRef}
-				className={styles.ingredient_tabs}
+				className={styles.tabs}
 			>
     		  <Tab 
 			  value={INGREDIENT_TYPES.BUN} 
@@ -71,7 +71,7 @@ function BurgerIngredients() {
     		  </Tab>
     		</section>
 			<section 
-				className={styles.scrollzone}
+				className={styles.ingredientsList}
 				onScroll={handleScroll}
 			>
 				{ loading && <p>Loading!</p> }

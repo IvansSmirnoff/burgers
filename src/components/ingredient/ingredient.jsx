@@ -14,9 +14,16 @@ import styles from './ingredient.module.css';
 
 const Ingredient = ({ ingredient }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const { constructorIngredients } = useSelector(state => ({
-		constructorIngredients: state.constructorIngredients.ingredients
-	}));
+	const getIngredients = (state) => ({
+		constructorIngredients: state.constructorIngredients.ingredients,
+		bun: state.constructorIngredients.bun
+	});
+
+	const { 
+		constructorIngredients,
+		bun
+	 } = useSelector(getIngredients);
+
 	const [ { opacity }, dragRef] = useDrag({
 		type: DND_TYPES.INGREDIENT,
 		item: ingredient,
@@ -28,8 +35,8 @@ const Ingredient = ({ ingredient }) => {
 	const dispatch = useDispatch();
 
 	let ingredientCount = constructorIngredients.filter(item => item._id === ingredient._id).length;
-	if(ingredient.type === 'bun'){
-		ingredientCount = 2 * ingredientCount;
+	if(bun && bun._id === ingredient._id){
+		ingredientCount = 2;
 	}
 
 	const handleModalClose = () => {

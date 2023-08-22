@@ -1,16 +1,16 @@
-import addUniqueKeyIds from '../../utils/unique-key-generator';
 import { 
 	ADD_INGREDIENT,
 	ADD_BUN,
 	COUNT_TOTAL_PRICE,
 	REMOVE_INGREDIENT,
-	SORT_INGREDIENT
+	SORT_INGREDIENT,
+	CLEAN_BIN
 } from './../actions/constructor-ingredients';
 
 const initialState = { 
 	ingredients: [],
 	bun: null, 
-	totalPrice: 0 
+	totalPrice: 0,
 }
 
 export const constructorIngredientsReducer = (state = initialState, action) =>{
@@ -20,18 +20,19 @@ export const constructorIngredientsReducer = (state = initialState, action) =>{
 	switch( action.type ){
 
 		case ADD_INGREDIENT: {
-			let newItem = addUniqueKeyIds(action.payload);
+			let newItem = action.payload;
 			newIngredients = [ ...newIngredients, newItem ];
 			return {
 				...state,
-				ingredients: newIngredients
+				ingredients: newIngredients,
 			}
 		}
 
 		case ADD_BUN: {
+			let newItem = action.payload;
 			return {
 				...state,
-				bun: addUniqueKeyIds(action.payload)
+				bun: newItem,
 			}
 		}
 
@@ -54,6 +55,10 @@ export const constructorIngredientsReducer = (state = initialState, action) =>{
 				...state,
 				ingredients: newIngredients
 			}
+		}
+		
+		case CLEAN_BIN: {
+			return initialState
 		}
 
 		case SORT_INGREDIENT: {
