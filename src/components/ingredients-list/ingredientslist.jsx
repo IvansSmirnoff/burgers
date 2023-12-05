@@ -1,38 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import styles from './ingredientslist.module.css';
+
+import { forwardRef } from 'react';
 import Ingredient from '../ingredient/ingredient';
 
-const typeNames = {
-    'bun':'Булки',
-    'sauce':'Соусы',
-    'main':'Начинки'
-};
-
-const IngredientList = ({listType, ingredients}) => {
-  return (
-    <>
-      <p className="text text_type_main-medium">
-        {typeNames[listType]}
-      </p>
-      <div className={styles.ingredients_list}>
-      { 
+const IngredientList = forwardRef(({ ingredients, filter, title }, ref) => {
+	return(
+		<>
+			<h2 ref={ref} className="text text_type_main-medium mb-6">{title}</h2>
+			<ul className={styles.itemsSection}>
+				{ 
 				ingredients
-				.filter( itm => itm.type === listType)
+				.filter( item => item.type === filter)
 				.map( (ingredient, i) => 
 				<Ingredient 
 				key={ingredient._id} 
 				ingredient={ingredient}
 				/> ) 
 				}
-      </div>
-    </>
-  );
-};
+			</ul>
+		</>
+	)
+});
 
-IngredientList.propTypes = {
-  listType: PropTypes.oneOf(['bun', 'main', 'sauce']),
-};
-
-export default IngredientList;
+export default IngredientList
