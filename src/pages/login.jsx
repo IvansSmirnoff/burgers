@@ -30,6 +30,7 @@ export function LoginPage() {
 	}
 
 	return(
+		<form>
 		<div className='app'>
 			<AppHeader/>
 			<main className='container--center'>
@@ -66,5 +67,6 @@ export function LoginPage() {
 				</p>
 			</main>
 		</div>
+		</form>
 	)
 }

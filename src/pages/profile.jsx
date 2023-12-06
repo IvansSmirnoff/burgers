@@ -37,16 +37,11 @@ export function ProfilePage() {
 		}
 	}, [dispatch])
 
-	const loguot = (e) => {
+	const logout = (e) => {
 		e.preventDefault();
 		dispatch(getLogout());
 	}
 
-	if(!isLogin()){
-		return(
-			<Redirect to="/login"/>
-		)
-	}
 	const handleFormChange = (e) => {
 		const newFormData = {
 			...formData,
@@ -84,7 +79,7 @@ export function ProfilePage() {
 					<NavLink to="/profile/orders" activeClassName={styles.activeLink} className="pt-3 pb-3">
 						<p className="text text_type_main-medium">История заказов</p>
 					</NavLink>
-					<a href="#" className="pt-3 pb-3" onClick={loguot}>
+					<a href="#" className="pt-3 pb-3" onClick={logout}>
 						<p className="text text_type_main-medium">Выход</p>
 					</a>
 					<p className="text text_type_main-default text_color_inactive mt-20">

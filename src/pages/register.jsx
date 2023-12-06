@@ -25,6 +25,7 @@ export function RegisterPage() {
 	return(
 		<div className='app'>
 			<AppHeader/>
+			<form>
 			<main className='container--center'>
 				<p className="text text_type_main-medium mb-6">Регистрация</p>
 				<div className="mb-6">
@@ -63,6 +64,7 @@ export function RegisterPage() {
 					<Link to='/login' className="ml-2">Войти</Link>
 				</p>
 			</main>
+			</form>
 		</div>
 	)
 }
