@@ -26,6 +26,7 @@ export const LOAD_USER_FAILED = 'LOAD_USER_FAILED';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED';
+export const USER_AUTHED = 'USER_AUTHED';
 
 export function getRegister(data){
 	return function (dispatch){

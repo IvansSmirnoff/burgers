@@ -11,13 +11,26 @@ export const logout = () => {
 	setCookie('access_token', null, {expires: -1});
 }
 
-export const isLogin = () => {
-	return fetchUser()
-	  .then(res => {
-		return res && res.success;
-	  })
-	  .catch(error => {
-		console.error("Error checking login status:", error);
-		return false;
-	  });
+export const isLogin = async () => {
+	const dispatch = useDispatch();
+	try {
+	  const response = await fetchUser();
+	  if (response && response.success) {
+		dispatch({
+			type: USER_AUTHED,
+			payload: true
+		});
+	  } else {
+		dispatch({
+			type: USER_AUTHED,
+			payload: false
+		});
+	  }
+	} catch (error) {
+	  console.error("Error checking login status:", error);
+	  dispatch({
+		type: USER_AUTHED,
+		payload: false
+	});
+	}
   };
