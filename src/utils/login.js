@@ -1,4 +1,5 @@
 import { setCookie, getCookie } from "./cookie";
+import { fetchUser } from "./auth-api"
 
 export const login = (refreshToken, accessToken) => {
     setCookie('token', refreshToken);
@@ -11,8 +12,12 @@ export const logout = () => {
 }
 
 export const isLogin = () => {
-	if (getCookie('token')) {
-		return true;
-    }
-	return false;
-}
+	return fetchUser()
+	  .then(res => {
+		return res && res.success;
+	  })
+	  .catch(error => {
+		console.error("Error checking login status:", error);
+		return false;
+	  });
+  };
