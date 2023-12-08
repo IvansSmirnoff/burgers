@@ -3,10 +3,10 @@ import { useDrag, useDrop } from 'react-dnd';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from 'react-redux';
 import { REMOVE_INGREDIENT, COUNT_TOTAL_PRICE } from "../../services/actions/constructor-ingredients";
-import { DND_TYPES } from '../../const/main';
+import { DND_TYPES } from '../../constants';
 
 import PropTypes from 'prop-types';
-import { ingredientPropTypes } from '../../utils/proptypes';
+import { ingredientPropTypes } from '../../utils/prop-types';
 
 import styles from './burger-constructor-item.module.css';
 
