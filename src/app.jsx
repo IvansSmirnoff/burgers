@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { 
 	BurgerConstructorPage, 
 	LoginPage, 
@@ -25,6 +26,11 @@ function SwitchWithModal() {
 	const history = useHistory();
 	const location = useLocation();
 	const background = location.state && location.state.background;
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(checkLogin())
+	}, [])
 
 	return (
 		<div>

@@ -3,7 +3,6 @@ import { Link, Redirect, useLocation } from 'react-router-dom';
 import { PasswordInput, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { getLogin } from '../services/actions/auth';
-import { isLogin } from '../utils/login';
 
 import AppHeader from './../components/app-header/app-header';
 
@@ -22,8 +21,8 @@ export function LoginPage() {
 			password 
 		}));
 	};
-
-	if(isLogin()){
+	const {isAuth} = useSelector(state => state.user.isAuth)
+	if(isAuth){
 		return (
 			<Redirect to={from || '/'} />
 		)

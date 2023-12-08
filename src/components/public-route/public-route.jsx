@@ -1,9 +1,9 @@
 import { Route, Redirect } from 'react-router-dom';
-import { isLogin } from '../../utils/login';
 import PropTypes from 'prop-types';
 
 export function PublicRoute({redirectTo, ...props}){
-	if(!isLogin()){
+	const {isAuth} = useSelector(state => state.user.isAuth)
+	if(!isAuth){
 		return <Route {...props} />
 	}else{
 		return <Redirect to={{ 

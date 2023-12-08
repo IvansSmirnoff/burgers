@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import AppHeader from './../components/app-header/app-header';
 import { getUser, getLogout, updateUser } from '../services/actions/auth';
-import { isLogin } from '../utils/login';
 
 import styles from './profile.module.css';
 
@@ -14,6 +13,7 @@ export function ProfilePage() {
 	const [formData, setFormData] = useState({ name:'', email:'', password:''});
 	const [isFormChanged, setIsFormChanged] = useState(false);
 	const {message, user} = useSelector(state => state.auth);
+	const {isAuth} = useSelector(state => state.user.isAuth)
 	const dispatch = useDispatch();
 
 	const setFormDataFromState = () => {
@@ -30,9 +30,9 @@ export function ProfilePage() {
 	useEffect(()=>{
 		setFormDataFromState();
 	},[user])
-
+	
 	useEffect(() => {
-		if(isLogin()){
+		if(isAuth){
 			dispatch(getUser());
 		}
 	}, [dispatch])

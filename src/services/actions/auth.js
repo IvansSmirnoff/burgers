@@ -27,6 +27,7 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED';
 export const USER_AUTHED = 'USER_AUTHED';
+export const USER_NOT_AUTHED = 'USER_NOT_AUTHED';
 
 export function getRegister(data){
 	return function (dispatch){
@@ -210,4 +211,23 @@ export function updateUser(formData){
 			})
 		})
 	}
+}
+
+export function checkLogin(){
+	fetchUser()
+	.then(res => {
+		if (res && res.success){
+			dispatch({
+				type: USER_AUTHED
+			})
+		}else{
+			dispatch({
+				type:USER_NOT_AUTHED
+			})
+		}
+	}).catch( err =>{
+		dispatch({
+			type: USER_NOT_AUTHED
+		})
+	})
 }

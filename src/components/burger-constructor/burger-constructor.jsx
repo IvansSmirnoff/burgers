@@ -18,7 +18,6 @@ import {
 	addConstructorIngredient
 } from './../../services/actions/constructor-ingredients';
 import { DND_TYPES } from '../../constants';
-import { isLogin } from '../../utils/login';
 
 import styles from './burger-constructor.module.css';
 
@@ -77,7 +76,8 @@ function BurgerConstructor () {
 	}
 	const handleOrderOpen = () => {
 		if(ingredients.length > 0 && bun ){
-			if(isLogin()){
+			const {isAuth} = useSelector(state => state.user.isAuth)
+			if(isAuth){
 				const ingredientIds = ingredients.map((item) => item._id);
 				dispatch(sendOrder({ingredients: [ bun._id, ...ingredientIds, bun._id]}));
 				setIsOrderModalOpen(true);

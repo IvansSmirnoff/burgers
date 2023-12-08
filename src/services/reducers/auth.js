@@ -1,3 +1,4 @@
+import { getJSDocReturnType } from "typescript"
 import { 
 	REGISTER,
 	REGISTER_SUCCESS,
@@ -23,7 +24,8 @@ const initialState = {
 	loading: false,
 	error: false,
 	message: null,
-	user: {}
+	user: {},
+	isAuth: false
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -64,7 +66,8 @@ export const authReducer = (state = initialState, action) => {
 			return{
 				...state,
 				user: action.user,
-				loading: false
+				loading: false,
+				isAuth: true
 			}
 		}
 		case LOGIN_FAILED: {
@@ -161,6 +164,18 @@ export const authReducer = (state = initialState, action) => {
 				loading: false,
 				error: true,
 				message: action.payload
+			}
+		}
+		case USER_AUTHED: {
+			return{
+				...state,
+				isAuth: true,
+			}
+		}
+		case USER_NOT_AUTHED: {
+			return{
+				...state,
+				isAuth: false,
 			}
 		}
 		default: { 
